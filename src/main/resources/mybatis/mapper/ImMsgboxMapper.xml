@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xbjs.webim.mapper.ImMsgboxMapper" >
+  <resultMap id="BaseResultMap" type="com.xbjs.webim.pojo.ImMsgbox" >
+    <id column="box_id" property="boxId" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="fromid" property="fromid" jdbcType="BIGINT" />
+    <result column="from_group" property="fromGroup" jdbcType="BIGINT" />
+    <result column="typ" property="typ" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="read" property="read" jdbcType="SMALLINT" />
+    <result column="time" property="time" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    box_id, uid, fromid, from_group, typ, remark, href, read, time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xbjs.webim.pojo.ImMsgboxExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from "im_msgbox"
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from "im_msgbox"
+    where box_id = #{boxId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from "im_msgbox"
+    where box_id = #{boxId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xbjs.webim.pojo.ImMsgboxExample" >
+    delete from "im_msgbox"
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xbjs.webim.pojo.ImMsgbox" >
+    insert into "im_msgbox" (box_id, uid, fromid,
+      from_group, typ, remark, 
+      href, read, time)
+    values (#{boxId,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{fromid,jdbcType=BIGINT}, 
+      #{fromGroup,jdbcType=BIGINT}, #{typ,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{href,jdbcType=VARCHAR}, #{read,jdbcType=SMALLINT}, #{time,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xbjs.webim.pojo.ImMsgbox" >
+    insert into "im_msgbox"
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="boxId != null" >
+        box_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="fromid != null" >
+        fromid,
+      </if>
+      <if test="fromGroup != null" >
+        from_group,
+      </if>
+      <if test="typ != null" >
+        typ,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="read != null" >
+        read,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="boxId != null" >
+        #{boxId,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=BIGINT},
+      </if>
+      <if test="fromGroup != null" >
+        #{fromGroup,jdbcType=BIGINT},
+      </if>
+      <if test="typ != null" >
+        #{typ,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="read != null" >
+        #{read,jdbcType=SMALLINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xbjs.webim.pojo.ImMsgboxExample" resultType="java.lang.Integer" >
+    select count(*) from "im_msgbox"
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update "im_msgbox"
+    <set >
+      <if test="record.boxId != null" >
+        box_id = #{record.boxId,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fromid != null" >
+        fromid = #{record.fromid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fromGroup != null" >
+        from_group = #{record.fromGroup,jdbcType=BIGINT},
+      </if>
+      <if test="record.typ != null" >
+        typ = #{record.typ,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.href != null" >
+        href = #{record.href,jdbcType=VARCHAR},
+      </if>
+      <if test="record.read != null" >
+        read = #{record.read,jdbcType=SMALLINT},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update "im_msgbox"
+    set box_id = #{record.boxId,jdbcType=BIGINT},
+      uid = #{record.uid,jdbcType=BIGINT},
+      fromid = #{record.fromid,jdbcType=BIGINT},
+      from_group = #{record.fromGroup,jdbcType=BIGINT},
+      typ = #{record.typ,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      href = #{record.href,jdbcType=VARCHAR},
+      read = #{record.read,jdbcType=SMALLINT},
+      time = #{record.time,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xbjs.webim.pojo.ImMsgbox" >
+    update "im_msgbox"
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="fromid != null" >
+        fromid = #{fromid,jdbcType=BIGINT},
+      </if>
+      <if test="fromGroup != null" >
+        from_group = #{fromGroup,jdbcType=BIGINT},
+      </if>
+      <if test="typ != null" >
+        typ = #{typ,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="read != null" >
+        read = #{read,jdbcType=SMALLINT},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=BIGINT},
+      </if>
+    </set>
+    where box_id = #{boxId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xbjs.webim.pojo.ImMsgbox" >
+    update "im_msgbox"
+    set uid = #{uid,jdbcType=BIGINT},
+      fromid = #{fromid,jdbcType=BIGINT},
+      from_group = #{fromGroup,jdbcType=BIGINT},
+      typ = #{typ,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      read = #{read,jdbcType=SMALLINT},
+      time = #{time,jdbcType=BIGINT}
+    where box_id = #{boxId,jdbcType=BIGINT}
+  </update>
+</mapper>
