@@ -1,0 +1,2 @@
+# webim
+采用springboot和layim构建webim，使用websocket作为通讯协议，目前已经能够正常聊天，并没有对好友的操作进行实现，查找和加好友没有实现，有需要的可以自行实现
